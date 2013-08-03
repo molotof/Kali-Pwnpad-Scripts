@@ -10,7 +10,7 @@ giskismet -x /opt/pwnpad/captures/kismet/Kismet*.netxml
 giskismet -q "select * from wireless" -o "/opt/pwnpad/captures/kismet/kismet-$NOW.kml"
 
 cd /sdcard/
-zip -r "kismet-captures-$NOW.zip" /opt/pwnpad/captures/kismet/
+zip -rj "kismet-captures-$NOW.zip" /opt/pwnpad/captures/kismet/
 echo "Successfully copied to /sdcard/kismet-captures-$NOW.zip"
 
 echo "Removing capture files..."
