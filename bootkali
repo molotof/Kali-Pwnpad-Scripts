@@ -45,5 +45,6 @@ umount $mnt/sys
 umount $mnt/system
 export PATH=$PRESERVED_PATH
 else
-ssh -i /data/local/kali/root/.ssh/id_rsa localhost
+chroot /data/local/kali /bin/bash
+# ssh -i /data/local/kali/root/.ssh/id_rsa localhost
 fi
