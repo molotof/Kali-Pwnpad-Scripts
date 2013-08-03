@@ -45,6 +45,11 @@ umount $mnt/sys
 umount $mnt/system
 export PATH=$PRESERVED_PATH
 else
+PRESERVED_PATH=$PATH
+export PATH=/usr/bin:/usr/sbin:/bin:/usr/local/bin:/usr/local/sbin:$PATH
+export TERM=linux
+export HOME=/root
+export LOGNAME=root
 chroot /data/local/kali /bin/bash
 # ssh -i /data/local/kali/root/.ssh/id_rsa localhost
 fi
