@@ -1,7 +1,8 @@
+# check if Kali is already running
 if [ $(sysctl -n kernel.shmmax) != "268435456" ]
-then 
+then
+
 mount -o remount,rw -t yaffs2 /dev/block/mtdblock3 /system
-export kit=/sdcard/kali
 export bin=/system/bin
 export mnt=/data/local/kali
 PRESERVED_PATH=$PATH
@@ -10,7 +11,7 @@ export TERM=linux
 export HOME=/root
 export LOGNAME=root
 
-#mount to Kali chroot
+# mount to Kali chroot
 
 mount -o bind /system $mnt/system
 mount -o bind /sdcard $mnt/sdcard
@@ -19,37 +20,40 @@ mount -t devpts devpts $mnt/dev/pts
 mount -t proc proc $mnt/proc
 mount -t sysfs sysfs $mnt/sys
 
-#set 250mb max memory for postgresql
+# set 250mb max memory for postgresql
 
 sysctl -w kernel.shmmax=268435456
 
-#set networking
+# set networking
 
 sysctl -w net.ipv4.ip_forward=1
 echo "nameserver 8.8.8.8" > $mnt/etc/resolv.conf
 echo "nameserver 8.8.4.4" >> $mnt/etc/resolv.conf
 echo "127.0.0.1 localhost" > $mnt/etc/hosts
 
-#execute startup script
+# execute startup script
 
 chroot $mnt /root/init.sh
 
-#After exit command is executed clear it all up
+# After exit command is executed clear it all up
 
 echo "Shutting down Kali"
 sysctl -w kernel.shmmax=33554432
 umount $mnt/dev/pts
+echo "unmounted pts"
 umount $mnt/dev
-umount $mnt/proc 
+echo "unmounted dev"
+umount $mnt/proc
+echo "unmounted proc"
 umount $mnt/sys 
+echo "unmounted sys"
 umount $mnt/system
+echo "unmounted system"
 export PATH=$PRESERVED_PATH
+
+# If chroot was already set up then skip the mounting
+
 else
-PRESERVED_PATH=$PATH
-export PATH=/usr/bin:/usr/sbin:/bin:/usr/local/bin:/usr/local/sbin:$PATH
-export TERM=linux
-export HOME=/root
-export LOGNAME=root
-chroot /data/local/kali /bin/bash
-# ssh -i /data/local/kali/root/.ssh/id_rsa localhost
+# chroot /data/local/kali /bin/bash
+ssh -i /data/local/kali/root/.ssh/id_rsa localhost
 fi
