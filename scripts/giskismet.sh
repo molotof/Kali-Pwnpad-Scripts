@@ -5,7 +5,11 @@ NOW=$(date +"%m-%d-%y-%H%M")
 
 echo "Adding Kismet data to local database"
 # add kismet data to giskmet database
-giskismet -x /opt/pwnpad/captures/kismet/Kismet*.netxml
+shopt -s nullglob
+for f in *.netxml
+do
+giskismet -x $f
+done
 
 # export kml of all wireless data
 giskismet -q "select * from wireless" -o "/opt/pwnpad/captures/kismet/kismet-$NOW.kml"
