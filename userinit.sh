@@ -1,5 +1,5 @@
 su
-echo "Sleep for 30 seconds"
+echo "Sleep for 20 seconds to allow mounting"
 sleep 20
 mount -o remount,rw -t yaffs2 /dev/block/mtdblock3 /system
 export bin=/system/bin
@@ -35,6 +35,7 @@ echo "127.0.0.1 localhost" > $mnt/etc/hosts
 echo "Starting SSH server..."
 chroot $mnt /etc/init.d/ssh start
 # echo "Starting VNC server..."
+chroot $mnt /etc/init.d/vncboot start
 # /usr/bin/vncserver :0 -geometry 1200x800
 
-echo "Background chroot service complete"
+echo "Kali SSH/VNC now running in background..."
