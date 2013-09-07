@@ -36,20 +36,7 @@ esac
 ##################################################################
 #                   GENERATE NEW SSH KEYS                        #
 ##################################################################
-f_sshkeys() {
-
-read -p echo "Do you wish to backup your old SSH keys to your sdcard? (y/n)" CONT
-
-if [ "$CONT" == "y" ]; then
-
-	NOW=$(date +"%m-%d-%y-%H%M%S")
-	echo "Copying old certificates to /sdcard/certs_backup.zip"
-	sleep2
-	cd /sdcard/
-	zip -rj certs_backup.zip ~/.ssh/*
-
-continue
-
+f_generatesssh(){
 	echo "Generating new keys and removing old ones."
 	echo "Password is optional and NOT recommended for automatic login."
 	sleep 3
@@ -63,7 +50,22 @@ continue
 	echo "Finished!"
 	sleep 3
 	f_interface
+}
 
+f_sshkeys() {
+
+read -p echo "Do you wish to backup your old SSH keys to your sdcard also? (y/n)" CONT
+
+if [ "$CONT" == "y" ]; then
+
+	NOW=$(date +"%m-%d-%y-%H%M%S")
+	echo "Copying old certificates to /sdcard/certs_backup.zip"
+	sleep2
+	cd /sdcard/
+	zip -rj certs_backup.zip ~/.ssh/*
+	f_generatessh()
+else
+	f_generatessh()
 fi
 }
 ##################################################################
