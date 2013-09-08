@@ -84,7 +84,7 @@ if [ "$CONT" == "y" ]; then
 	echo "Creating backup of old scripts in /opt/pwnpad/scripts/backup_scripts$NOW.zip"
 	sleep 3
 	cd /opt/pwnpad/scripts/
-	zip -p "backup_scripts$NOW.zip"
+	zip -p "backup_scripts$NOW.zip" *.sh
 	echo "Downloading scripts to temporary folder (/tmp)"
 	sleep 2
 	cd /tmp/
