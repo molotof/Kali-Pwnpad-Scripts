@@ -141,6 +141,7 @@ f_evilap(){
 
   echo "Running sslstrip..."
   sslstrip -a > /opt/pwnpad/captures/$sslstripfilename &
+  tail -f $logname
 }
 
 #########################################
