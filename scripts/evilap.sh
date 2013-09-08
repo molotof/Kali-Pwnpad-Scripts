@@ -170,7 +170,7 @@ f_niceap(){
   iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
  
   echo "Running sslstrip..."
-  sslstrip -a -w /opt/pwnpad/catpures/$sslstripfilename &
+  sslstrip -a --write=/opt/pwnpad/catpures/sslstrip/$sslstripfilename &
   tail -f $logname
 }
 
