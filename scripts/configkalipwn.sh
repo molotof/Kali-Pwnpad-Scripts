@@ -77,7 +77,7 @@ f_updatescripts() {
 	clear
 	echo "This will pull scripts from Github. This will not check for updates."  
 	echo "If you have made any changes to the scripts you should not run this."
-	read -p echo "Do you wish to continue? (y/n)" CONT
+	read -p "Do you wish to continue? (y/n)" CONT
 
 if [ "$CONT" == "y" ]; then
 
