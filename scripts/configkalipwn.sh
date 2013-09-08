@@ -9,7 +9,7 @@
 f_interface(){
 clear
 echo "************************"
-toilet -f standard -F metal "KaliPWN Configuration"
+toilet -f standard -F metal "KaliPWN Config"
 echo "************************"
 echo "[1] Generate new SSH Keys"
 echo "[2] Update Scripts"
