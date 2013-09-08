@@ -17,6 +17,7 @@ echo "[3] Update Everything (MSF/OpenVAS/Kali)"
 echo "[4] Create Metasploit Postgresql Database/User"
 echo "[5] Change VNC password"
 echo "[6] OpenVAS Maintenance"
+echo "[7] Configure Timezone"
 echo "[0] Exit"
 echo -n "Enter your menu choice [1-6]: "
 
@@ -32,6 +33,7 @@ case $menuchoice in
 4) f_metasploit ;;
 5) f_vncpasswd ;;
 6) f_openvas ;;
+7) f_timezone ;;
 0) exit 0 ;;
 *) echo "Incorrect choice..." ;
 esac
@@ -62,7 +64,7 @@ f_sshkeys() {
 	sleep 1
 	cat id_rsa.pub > authorized_keys
 	echo "Finished!"
-	sleep 1
+	sleep 2
 	f_interface
 }
 
@@ -112,6 +114,7 @@ f_updateall(){
 	echo "Updating OpenVAS"
 	sleep 2
 	openvas-nvt-sync
+	f_interface
 }
 ##################################################################
 #                   VNC Password Change                          #
@@ -123,7 +126,7 @@ f_vncpasswd(){
 	f_interface
 }
 ##################################################################
-#                   GENERATE NEW SSH KEYS                        #
+#                   Generate metasploit user/db                  #
 ##################################################################
 f_metasploit() {
 	service postgresql
@@ -137,6 +140,8 @@ f_metasploit() {
 	echo "You can now add database connection to startup at ~/.msf4/msfconsole.rc"
 	echo "Just add:"
 	echo "db_connect $msuser:YOURPASSWORD@127.0.0.1:5432/$dbname"
+	sleep 4
+	f_interface
 	}
 ##################################################################
 #                   OpenVAS Main.                                #
@@ -157,6 +162,13 @@ case $vasmenuchoice in
 4) f_interface ;;
 *) echo "Incorrect choice..." ;
 esac
+}
+##################################################################
+#                   CHANGE TIMEZONE                              #
+##################################################################
+f_timezone(){
+	dpkg-reconfigure tzdata;
+	f_interface
 }
 
 ##################################################################
