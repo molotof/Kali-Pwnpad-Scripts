@@ -140,7 +140,7 @@ f_evilap(){
   iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
 
   echo "Running sslstrip..."
-  sslstrip -a --write=/opt/pwnpad/catpures/sslstrip/$sslstripfilename &
+  sslstrip -a > /opt/pwnpad/captures/$sslstripfilename &
 }
 
 #########################################
@@ -171,7 +171,7 @@ f_niceap(){
   iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
  
   echo "Running sslstrip..."
-  sslstrip -a --write=/opt/pwnpad/catpures/sslstrip/$sslstripfilename &
+  sslstrip -a > /opt/pwnpad/captures/$sslstripfilename &
   tail -f $logname
 }
 
