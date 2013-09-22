@@ -19,7 +19,7 @@ echo "[5] Change VNC password"
 echo "[6] OpenVAS Maintenance"
 echo "[7] Configure Timezone"
 echo "[0] Exit"
-echo -n "Enter your menu choice [1-6]: "
+echo -n "Enter your menu choice [1-7]: "
 
 # wait for character input
 
