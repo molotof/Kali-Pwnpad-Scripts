@@ -1,4 +1,4 @@
-# check if Kali is already running by looking at shmmax size
+# check if Kali is already running by lookin at shmmax size
 if [ $(sysctl -n kernel.shmmax) != "268435456" ]
 then
 mount -o remount,rw -t yaffs2 /dev/block/mtdblock3 /system
@@ -30,25 +30,10 @@ echo "nameserver 8.8.8.8" > $mnt/etc/resolv.conf
 echo "nameserver 8.8.4.4" >> $mnt/etc/resolv.conf
 echo "127.0.0.1 localhost" > $mnt/etc/hosts
 
-# execute startup script - starts SSH and VNC
-
-chroot $mnt /root/init.sh
-
-# After exit command is executed clear it all up. echo is for debugging
-
-echo "Shutting down Kali"
-sysctl -w kernel.shmmax=33554432
-umount $mnt/dev/pts
-echo "unmounted pts"
-umount $mnt/dev
-echo "unmounted dev"
-umount $mnt/proc
-echo "unmounted proc"
-umount $mnt/sys 
-echo "unmounted sys"
-umount $mnt/system
-echo "unmounted system"
-export PATH=$PRESERVED_PATH
+# execute startup script
+echo "Starting SSH server..."
+chroot $mnt /etc/init.d/ssh start
+ssh -i /data/local/kali/root/.ssh/id_rsa localhost
 
 # If chroot was already set up then skip the mounting
 else
