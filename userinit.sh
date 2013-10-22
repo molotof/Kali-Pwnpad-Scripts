@@ -1,7 +1,4 @@
 su
-echo 1 > /sys/android_touch/doubletap2wake
-echo 1 > /sys/android_touch/shortsweep
-echo 2 > /sys/android_touch/sweep2wake
 echo "Sleep for 20 seconds to allow mounting"
 sleep 20
 mount -o remount,rw -t yaffs2 /dev/block/mtdblock3 /system

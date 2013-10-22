@@ -137,9 +137,9 @@ echo ""
 echo "Scanning started. Depending on the option(s) chosen this may take some time."
 echo ""
 case $scanOption in
-	noemail) "$installdir"/cewl.rb -v -c -w $cewldir/$REF$TODAY/wordlist $TARGET 
+	noemail) "cewl -v -c -w $cewldir/$REF$TODAY/wordlist $TARGET"
 	;;
-	email) "$installdir"/cewl.rb -v -c -w $cewldir/$REF$TODAY/wordlist -e --email_file $cewldir/$REF$TODAY/emails $TARGET
+	email) "cewl -v -c -w $cewldir/$REF$TODAY/wordlist -e --email_file $cewldir/$REF$TODAY/emails $TARGET"
 ;;
 esac
 echo -e "\e[1;31mScans finished.\e[00m"
