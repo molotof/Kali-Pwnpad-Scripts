@@ -15,6 +15,7 @@ CAPTURE_FILES=("/opt/pwnpad/captures/*.cap"
   "/opt/pwnpad/captures/evilap/*"
   "/opt/pwnpad/captures/nmap/*"
   "/opt/pwnpad/captures/cewl/*"
+  "/opt/pwnpad/captures/wsorrow/*"
   "/opt/pwnpad/captures/stringswatch/*")
 
 MISC_FILES=("/opt/pwnpad/easy-creds/easy-creds-*"

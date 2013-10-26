@@ -195,11 +195,11 @@ echo ""
 case $findHash in
 	1) echo "Starting to look for" $myHash
 	   echo "Depending on the hash this may take a minute or two."
-		python findmyhash.py $hashOption -h $myHash -g
+		python /opt/pwnpad/scripts/findmyhash.py $hashOption -h $myHash -g
 	;;
 	2) echo "Starting a search for the hashes in" $hashList
 		echo "Depending on how many are included in the file it may take some time."
-		python findmyhash.py $hashOption -f $hashList
+		python /opt/pwnpad/scripts/findmyhash.py $hashOption -f $hashList
 			;;
 esac
 echo -e "\e[1;31mScans finished.\e[00m"

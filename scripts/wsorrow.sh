@@ -5,6 +5,8 @@
 #Tested on Pwnpad Community Edition
 # Uses the perl tool Web-Sorrow
 VERSION="1.0"
+installdir=/opt/pwnpad/websorrow
+
 ###################################################################################################################
 # Intro
 #

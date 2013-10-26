@@ -58,5 +58,5 @@ read ENTERKEY
 ##########################################################################################################################
 f_intro
 f_wireless
-python $installdir/AP_fucker.py
+python /opt/pwnpad/scripts/AP_fucker.py
 

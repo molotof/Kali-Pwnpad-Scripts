@@ -18,6 +18,10 @@ echo "[4] Create Metasploit Postgresql Database/User"
 echo "[5] Change VNC password"
 echo "[6] OpenVAS Maintenance"
 echo "[7] Configure Timezone"
+echo "#### VNC Maintenance #####"
+echo "[8] Kill all VNC instances (remove pid/logs)"
+echo "[9] Start VNC server"
+echo "##########################"
 echo "[0] Exit"
 echo -n "Enter your menu choice [1-7]: "
 
@@ -34,6 +38,8 @@ case $menuchoice in
 5) f_vncpasswd ;;
 6) f_openvas ;;
 7) f_timezone ;;
+8) f_vnckill ;;
+9) f_vncstart ;;
 0) exit 0 ;;
 *) echo "Incorrect choice..." ;
 esac
@@ -171,5 +177,38 @@ f_timezone(){
 	f_interface
 }
 
+##################################################################
+#                   KILL ALL VNC                                 #
+##################################################################
+f_vnckill(){
+	echo "Removing all PID and log files from /root/.vnc/"
+	echo "Killing all VNC process ID's"
+	sleep 2
+	kill $(ps aux | grep 'Xtightvnc' | awk '{print $2}')
+	echo "Removing PID files"
+	sleep 2
+	rm /root/.vnc/*.pid;
+	echo "Removing log files"
+	sleep 2
+	rm /root/.vnc/*.log;
+	echo "Removing lock file"
+	sleep 2
+	rm /tmp/.X1-lock
+	echo "All VNC process/logs have been removed"
+	sleep 3
+	f_interface
+}
+##################################################################
+#                   VNC START                                    #
+##################################################################
+f_vncstart(){
+	echo "Starting VNC Server"
+	sleep 2
+	vncserver -geometry 1280x1024 -depth 24
+	echo "Your display number will be the last number of the port"
+	echo "So display :1 will be port 5901"
+	sleep 5
+	f_interface
+}
 ##################################################################
 f_interface
