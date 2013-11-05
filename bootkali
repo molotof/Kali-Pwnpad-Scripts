@@ -1,5 +1,4 @@
-# check if Kali is already running by lookin at shmmax size
-if [ $(sysctl -n kernel.shmmax) != "268435456" ]
+if [[ $(ssh -q -o "BatchMode=yes" -i /data/local/kali/root/.ssh/id_rsa localhost echo ok 2>&1) != 'ok' ]]
 then
 mount -o remount,rw -t yaffs2 /dev/block/mtdblock3 /system
 export bin=/system/bin

