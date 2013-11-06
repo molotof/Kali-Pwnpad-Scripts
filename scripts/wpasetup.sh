@@ -17,5 +17,6 @@ f_wlan1check
 echo "Everything is good. Starting services and wicd-curses"
 sleep 3
 service dbus restart
-service wicd restart
+service wicd stop
+service wicd start
 wicd-curses
