@@ -193,7 +193,7 @@ f_vnckill(){
 	rm /root/.vnc/*.log;
 	echo "Removing lock file"
 	sleep 2
-	rm /tmp/.X1-lock
+	rm -vrf "/tmp/\.*"
 	echo "All VNC process/logs have been removed"
 	sleep 3
 	f_interface
