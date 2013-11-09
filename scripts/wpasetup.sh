@@ -16,7 +16,12 @@ fi
 f_wlan1check
 echo "Everything is good. Starting services and wicd-curses"
 sleep 3
-service dbus restart
+service dbus stop
+sleep 1
 service wicd stop
+sleep 1
+service dub start
+sleep 2
 service wicd start
+sleep 2
 wicd-curses
