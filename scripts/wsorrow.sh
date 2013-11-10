@@ -55,11 +55,12 @@ case $scanChoice in
 	2) scanOption="Intense"
 		echo "Setting the scan option to $scanOption"
 			break;
-			;;
+	;;
 	3) scanOption="Stealthy"
 		echo "Setting the scan option to $scanOption"
 			break;
-		*) echo "Invalid Input. Please enter valid number [1-3]" 
+	;;
+	*) echo "Invalid Input. Please enter valid number [1-3]" 
 	;;
 esac
 done
