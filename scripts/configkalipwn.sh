@@ -23,7 +23,7 @@ echo "[8] Kill all VNC instances (remove pid/logs)"
 echo "[9] Start VNC server"
 echo "##########################"
 echo "[0] Exit"
-echo -n "Enter your menu choice [1-7]: "
+echo -n "Enter your menu choice [1-9]: "
 
 # wait for character input
 
