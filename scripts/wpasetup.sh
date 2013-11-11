@@ -20,7 +20,7 @@ service dbus stop
 sleep 1
 service wicd stop
 sleep 1
-service dub start
+service dbus start
 sleep 2
 service wicd start
 sleep 2
