@@ -1,5 +1,6 @@
 #!/bin/bash
 #####################################
+clear
 echo "Installing necessary files..."
 apt-get update
 apt-get install libssl-dev libnl-dev haveged 
@@ -42,19 +43,21 @@ rm -rf /root/hostapd/hostapd-1.1
 rm -rf /root/hostapd/hostapd-1.1.tar.gz
 rm -rf /opt/pwnpad/freeradius-wpe
 #####################################
-echo "Download RadiusWPE2John"
+echo "Downloading create_ap to /usr/bin"
+cd /usr/bin
+wget https://raw.github.com/oblique/create_ap/master/create_ap
+chmod +x create_ap
+#####################################
+echo "Download RadiusWPE2John/Rad-free"
 cd /opt/pwnpad/
 mkdir freeradius
 cd freeradius
 wget 'http://pastebin.com/raw.php?i=RJwgbwNh'
 mv 'raw.php\?i\=RJwgbwNh' RadiusWPE2John.py
 chmod +x RadiusWPE2John.py
-#####################################
-echo "Downloading create_ap to /usr/bin"
-cd /usr/bin
-wget https://raw.github.com/oblique/create_ap/master/create_ap
-chmod +x create_ap
-echo "Command line: create_ap wlan1 wlan0 'ap name' 'passphrase' "
+wget 'https://raw.github.com/binkybear/Kali-Pwnpad-Scripts/master/rad-free.sh'
+chmod +x rad-free.sh
+echo "Try rad-free.sh in /opt/pwnpad/freeradius folder"
 # NOTES ########################
 # Start FreeRADIUS #############
 #
