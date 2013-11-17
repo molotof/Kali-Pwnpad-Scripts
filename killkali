@@ -26,4 +26,5 @@ umount $mnt/proc
 echo "unmounted proc"
 umount $mnt/sys 
 echo "unmounted sys"
+losetup -d /dev/block/loop255
 export PATH=$PRESERVED_PATH

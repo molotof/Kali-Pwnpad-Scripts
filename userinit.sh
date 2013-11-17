@@ -12,7 +12,13 @@ export LOGNAME=root
 
 # mount to Kali chroot
 echo "mounting..."
-
+if [ -b /dev/block/loop255 ]; then
+	echo "Loop device exists"
+else
+	busybox mknod /dev/block/loop255 b 7 255
+fi
+losetup /dev/block/loop255 /data/local/kali.img
+mount -t ext4 /dev/block/loop255 $mnt
 mount -o bind /system $mnt/system
 mount -o bind /sdcard $mnt/sdcard
 mount -o bind /dev $mnt/dev
