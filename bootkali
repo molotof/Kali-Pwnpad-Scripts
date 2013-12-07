@@ -8,14 +8,6 @@ else
     mkdir .ssh
 fi
 }
-#########  MKNOD #########
-f_mknod(){
-if [ -b /dev/block/loop255 ]; then
-	echo "Loop device exists"
-else
-	busybox mknod /dev/block/loop255 b 7 255
-fi
-}
 ######### LOAD KALI CHROOT WITH SSH ############
 f_boot(){
 if [[ $(ssh -q -o "BatchMode=yes" -i /data/local/kali/root/.ssh/id_rsa localhost echo ok 2>&1) != 'ok' ]]; then
@@ -29,9 +21,6 @@ if [[ $(ssh -q -o "BatchMode=yes" -i /data/local/kali/root/.ssh/id_rsa localhost
 	export LOGNAME=root
 
 	# mount to Kali chroot
-
-	losetup /dev/block/loop255 /data/local/kali.img
-	mount -t ext4 /dev/block/loop255 $mnt
 	mount -o bind /system $mnt/system
 	mount -o bind /sdcard $mnt/sdcard
 	mount -o bind /dev $mnt/dev
@@ -59,5 +48,4 @@ else
 }
 #########################
 f_sshcheck
-f_mknod
 f_boot

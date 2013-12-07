@@ -137,7 +137,7 @@ echo ""
 echo "Using the following reference name" $REF
 if [ ! -d "$nmapdir" ]; then
   # Control will enter here and create $nmapdir if it doesn't exist.
-  mkdir "$nampdir"
+  mkdir -p "$nampdir"
 fi
 cd "$nmapdir"
 if [ ! -d ./"$REF" ]; then
