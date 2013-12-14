@@ -141,8 +141,7 @@ f_evilap(){
 
   echo "Running sslstrip and saving output to "
   cd /opt/pwnpad/sslstrip
-  python sslstrip.py -a -l 10000 -w $sslstripfilename & tail -f $sslstripfilename
-
+  python sslstrip.py -a -l 10000 -w $sslstripfilename & tail -f $logname
 }
 
 #########################################
@@ -173,7 +172,7 @@ f_niceap(){
  
   echo "Running sslstrip and saving output to "
   cd /opt/pwnpad/sslstrip
-  python sslstrip.py -a -l 10000 -w $sslstripfilename & tail -f $sslstripfilename
+  python sslstrip.py -a -l 10000 -w $sslstripfilename & tail -f $logname
 }
 
 #########################################
