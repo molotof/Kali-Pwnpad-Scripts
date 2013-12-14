@@ -187,14 +187,15 @@ f_vnckill(){
 	kill $(ps aux | grep 'Xtightvnc' | awk '{print $2}')
 	echo "Removing PID files"
 	sleep 2
-	rm /root/.vnc/*.pid;
+	vncdisplay=$(ls ~/.vnc/*.pid | sed -e s/[^0-9]//g)
+	for x in $vncdisplay; do tightvncserver -kill :$x; done;
 	echo "Removing log files"
 	sleep 2
 	rm /root/.vnc/*.log;
 	echo "Removing lock file"
 	sleep 2
-	rm -vrf "/tmp/\.*"
-	echo "All VNC process/logs have been removed"
+	rm -vrf "/tmp/.X*"
+	echo "All VNC process/logs have hopefully been removed"
 	sleep 3
 	f_interface
 }
@@ -206,8 +207,8 @@ f_vncstart(){
 	sleep 2
 	vncserver -geometry 1280x1024 -depth 24
 	echo "Your display number will be the last number of the port"
-	echo "So display :1 will be port 5901"
-	sleep 5
+	echo "So display :X will be port 590X."
+	read -p "Press any key to continue..."
 	f_interface
 }
 ##################################################################
