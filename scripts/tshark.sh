@@ -87,7 +87,7 @@ echo
 f_yes(){
 	filename=tshark$(date +%F-%H%M).cap
 
-        tshark -i $interface -w /opt/pwnpad/captures/tshark/$filename -S
+        tshark -i $interface -w /opt/pwnpad/captures/tshark/$filename
 
 }
 
