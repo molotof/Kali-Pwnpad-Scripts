@@ -45,7 +45,7 @@ fi
 #######################################################
 f_start(){
 echo "Handhsaker autobot on wlan1"
-handshaker -a -T 5 -o /opt/pwnpad/captures/handshaker;
+handshaker -a  -i wlan1 -g -o /opt/pwnpad/captures/handshaker;
 }
 #######################################################
 clear
