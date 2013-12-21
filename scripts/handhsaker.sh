@@ -9,7 +9,7 @@ mkdir -p "/opt/pwnpad/captures/handshaker"
 if [ ! -f /usr/bin/handshaker ]; then
 	echo "Downloading handshaker..."
 	sleep 3
-	wget https://raw.github.com/d4rkcat/HandShaker/master/handshaker.sh
+	wget https://raw.github.com/binkybear/HandShaker/master/handshaker.sh
 	apt-get -y install beep
 	echo "Copying to /usr/bin/handshaker"
 	sleep 2
