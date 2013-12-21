@@ -13,7 +13,7 @@ if [ ! -f /usr/bin/handshaker ]; then
 	apt-get -y install beep
 	echo "Copying to /usr/bin/handshaker"
 	sleep 2
-	mv handshaker.sh /usr/bin/handhsaker
+	mv handshaker.sh /usr/bin/handshaker
 	chmod +x /usr/bin/handshaker
 fi
 }
