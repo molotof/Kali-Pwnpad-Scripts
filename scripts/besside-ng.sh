@@ -19,14 +19,18 @@ then
 	airmon-ng start wlan1
 else
 	echo "Monitor mode appears to be running. Moving on."
+	sleep 3
 fi
 }
 #####################################################
 # START BESSIDE-NG
 #####################################################
 f_besside_ng(){
+	clear
+	echo "Moving to folder opt/pwnpad/captures/besside-ng"
 	mkdir -p "/opt/pwnpad/captures/besside-ng"
 	cd /opt/pwnpad/captures/besside-ng
+	echo "Running besside-ng..."
 	besside-ng -vv mon0;
 }
 #####################################################
@@ -34,7 +38,13 @@ f_besside_ng(){
 #####################################################
 f_clean_handshake(){
 NOW=$(date +"%m-%d-%y-%H%M%S")
-besside-ng-crawler "/opt/pwnpad/captures/besside-ng/ out.cap"
+capfile=/opt/pwnpad/captures/besside-ng/wpa.cap
+dicfile=/opt/pwnpad/dic/WPA.dic
+
+sh /opt/pwnpad/scripts/william.sh "/opt/pwnpad/captures/besside-ng/william-out.cap" "$capfile" -A $dicfile;
+
+#besside-ng-crawler "/opt/pwnpad/captures/besside-ng/" clean.cap
+
 cd /sdcard/
 zip -rj "besside-ng$NOW.zip" /opt/pwnpad/captures/besside-ng/
 echo "/sdcard/besside-ng$NOW.zip saved"
