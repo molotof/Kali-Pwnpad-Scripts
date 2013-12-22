@@ -31,10 +31,10 @@ f_besside_ng(){
 	mkdir -p "/opt/pwnpad/captures/besside-ng"
 	cd /opt/pwnpad/captures/besside-ng
 	echo "Running besside-ng..."
-	besside-ng -vv mon0;
+	besside-ng -v mon0;
 }
 #####################################################
-# CLEAN HANDSHAKES
+# CLEAN HANDSHAKES & ATTACK FILES
 #####################################################
 f_clean_handshake(){
 NOW=$(date +"%m-%d-%y-%H%M%S")
@@ -42,7 +42,7 @@ capfile=/opt/pwnpad/captures/besside-ng/wpa.cap
 dicfile=/opt/pwnpad/dic/WPA.dic
 
 cd /opt/pwnpad/scripts
-./william.sh "/opt/pwnpad/captures/besside-ng/william-out.cap" "$capfile" -A $dicfile;
+./william.sh "/opt/pwnpad/captures/besside-ng/william-out.cap" "$capfile" -a;
 
 #besside-ng-crawler "/opt/pwnpad/captures/besside-ng/" clean.cap
 
