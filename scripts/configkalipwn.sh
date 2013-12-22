@@ -1,4 +1,3 @@
-
 #!/bin/bash
 #
 # Set up script for new logins / passwords
@@ -93,6 +92,7 @@ if [ "$CONT" == "y" ]; then
 	zip -p "backup_scripts$NOW.zip" *.sh
 	echo "Downloading scripts to temporary folder (/tmp)"
 	sleep 2
+	mkdir -p /tmp
 	cd /tmp/
 	git clone https://github.com/binkybear/Kali-Pwnpad-Scripts.git
 	echo "Copying scripts to /opt/pwnpad/scripts"
@@ -107,7 +107,7 @@ else
 fi	
 }
 ##################################################################
-#                   Update KaliPWN Scripts                       #
+#                   Update Metasploit                            #
 ##################################################################
 f_updateall(){
 	clear
