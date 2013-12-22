@@ -32,7 +32,7 @@ f_besside_ng(){
 #####################################################
 # CLEAN HANDSHAKES
 #####################################################
-clean_handshake(){
+f_clean_handshake(){
 NOW=$(date +"%m-%d-%y-%H%M%S")
 besside-ng-crawler "/opt/pwnpad/captures/besside-ng/ out.cap"
 cd /sdcard/
@@ -41,8 +41,9 @@ echo "/sdcard/besside-ng$NOW.zip saved"
 sleep 5
 }
 #####################################################
-# CLEAN HANDSHAKES
+# ERASE OLD FILES
 #####################################################
+f_erase(){
 read -p "Would you like to erase all files in besside-ng folder? (y/n)" CONT
 if [ "$CONT" == "y" ]; then
 	echo "Removing capture files..."
@@ -51,8 +52,10 @@ else
   echo "All files copied successfully!";
 fi
 exit
+}
 #####################################################
 clear
 f_wireless
 f_besside_ng
-clean_handshake
+f_clean_handshake
+f_erase
