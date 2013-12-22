@@ -41,7 +41,8 @@ NOW=$(date +"%m-%d-%y-%H%M%S")
 capfile=/opt/pwnpad/captures/besside-ng/wpa.cap
 dicfile=/opt/pwnpad/dic/WPA.dic
 
-sh /opt/pwnpad/scripts/william.sh "/opt/pwnpad/captures/besside-ng/william-out.cap" "$capfile" -A $dicfile;
+cd /opt/pwnpad/scripts
+./william.sh "/opt/pwnpad/captures/besside-ng/william-out.cap" "$capfile" -A $dicfile;
 
 #besside-ng-crawler "/opt/pwnpad/captures/besside-ng/" clean.cap
 
