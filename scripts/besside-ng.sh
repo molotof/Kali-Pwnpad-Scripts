@@ -34,27 +34,23 @@ f_besside_ng(){
 #####################################################
 clean_handshake(){
 NOW=$(date +"%m-%d-%y-%H%M%S")
-"besside-ng-crawler /opt/pwnpad/captures/besside-ng $NOW.cap"
+besside-ng-crawler "/opt/pwnpad/captures/besside-ng/ out.cap"
 cd /sdcard/
 zip -rj "besside-ng$NOW.zip" /opt/pwnpad/captures/besside-ng/
 echo "/sdcard/besside-ng$NOW.zip saved"
 sleep 5
 }
-# for capfile in $(find . -iname '*.cap'); do
-# essid="pyrit -r $capfile analyze | grep AccessPoint | cut -d \' -f2"
-# count=0
-# tval=`tshark -r $capfile -Y "eapol || wlan_mgt.tag.interpretation eq $2 || (wlan.fc.type_subtype==0x08 && wlan_mgt.ssid eq $essid)"`
-# count=$(($count + `echo $tval | grep -c "SSID=$essid"`))
-# count=$(($count + `echo $tval | grep -c "Message 1 of 4"`))
-# count=$(($count + `echo $tval | grep -c "Message 2 of 4"`))
-# count=$(($count + `echo $tval | grep -c "Message 3 of 4"`))
-# count=$(($count + `echo $tval | grep -c "Message 4 of 4"`))
-# if [ "$count" == "5" ]; then
-#     echo "Four Way Handshake Captured"
-#     tshark -r $1 -R "eapol || wlan_mgt.tag.interpretation eq $essid || (wlan.fc.type_subtype==0x08 && wlan_mgt.ssid eq $essid) -w $1_stripped.cap"
-# else
-#     echo "Incomplete Four Way Handshake"
-# fi
+#####################################################
+# CLEAN HANDSHAKES
+#####################################################
+read -p "Would you like to erase all files in besside-ng folder? (y/n)" CONT
+if [ "$CONT" == "y" ]; then
+	echo "Removing capture files..."
+	wipe -f -i -r /opt/pwnpad/captures/besside-ng/*
+else
+  echo "All files copied successfully!";
+fi
+exit
 #####################################################
 clear
 f_wireless
