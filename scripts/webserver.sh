@@ -1,6 +1,7 @@
 #!/bin/bash
 if [ -d "/opt/pwnpad/web-interface" ]; then
 	echo "Starting webserver on localhost:8000"
+	service atd start
 	cd /opt/pwnpad/web-interface
 	php -S localhost:8000
 else
@@ -10,6 +11,7 @@ else
 	cd /opt/pwnpad
 	git clone https://github.com/binkybear/web-interface.git
 	echo "Starting webserver on localhost:8000"
+	service atd start
 	cd /opt/pwnpad/web-interface/infusions
 	rm -r .gitignore
 	cd /opt/pwnpad/web-interface
