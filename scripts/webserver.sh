@@ -10,6 +10,8 @@ else
 	cd /opt/pwnpad
 	git clone https://github.com/binkybear/web-interface.git
 	echo "Starting webserver on localhost:8000"
+	cd /opt/pwnpad/web-interface/infusions
+	rm -r .gitignore
 	cd /opt/pwnpad/web-interface
 	php -S localhost:8000
 fi
