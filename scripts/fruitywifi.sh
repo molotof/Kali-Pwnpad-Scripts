@@ -10,7 +10,7 @@ else
 	cd /opt/pwnpad
 	git clone https://github.com/binkybear/FruityWifi.git
 	cd FruityWifi
-	chmod +x install-kalipwn.such
+	chmod +x install-kalipwn.sh
 	./install-kalipwn.sh;
 	echo "Starting webserver on localhost:8000"
 	cd /var/www/FruityWifi/
